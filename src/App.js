@@ -2,6 +2,11 @@ import "./App.css";
 import Dashboard from "./Dashboard";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
+import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import CreateStudent from "./CreateStudent";
+import EditStudent from "./EditStudent";
+import {useState} from 'react'
+import Table from 'react-bootstrap/Table';
 
 function App() {
   let data={
@@ -10,7 +15,30 @@ function App() {
     tasks:40,
     pendingRequests:18
   }
+
+  let [students,setStudents] = useState([
+    {
+      name:'Raj',
+      email:'raj@gmail.com',
+      mobile:'123456789',
+      batch:"B36WD"
+    },
+    {
+      name:'Abi',
+      email:'raj@gmail.com',
+      mobile:'123456789',
+      batch:"B36WD"
+    },
+    {
+      name:'Jeeva',
+      email:'raj@gmail.com',
+      mobile:'123456789',
+      batch:"B36WD"
+    }
+  ]
+  )
   return (
+    <BrowserRouter>
     <div id="wrapper">
       <Sidebar />
       <div id="content-wrapper" class="d-flex flex-column">
@@ -26,13 +54,22 @@ function App() {
               </a>
             </div>
             <div class="row">
-            <Dashboard data={data}/>
+            
+            <Routes>
+              <Route path="dashboard" element={<Dashboard data={{data,students,setStudents}}/>}/>
+              <Route path="createstudent" element={<CreateStudent/>}/>
+              <Route path="editstudent" element={<EditStudent/>}/>
+              <Route path="/" element={<Dashboard data={{data,students,setStudents}}/>}/>
+
+            </Routes>
+            
            
             </div>
           </div>
         </div>
       </div>
     </div>
+    </BrowserRouter>
   );
 }
 
