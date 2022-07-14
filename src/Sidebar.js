@@ -1,7 +1,11 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, { useContext } from 'react'
+import {Link,useNavigate} from 'react-router-dom'
+import swal from 'sweetalert'
+import { StudentContext } from './App'
 
 function Sidebar() {
+    let navigate = useNavigate()
+    let context = useContext(StudentContext)
   return (
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -23,21 +27,27 @@ function Sidebar() {
 
             <hr class="sidebar-divider"/>
 
-            <div class="sidebar-heading">
-                Interface
-            </div>
+            
 
             <li class="nav-item">
-                <div class="nav-link collapsed">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
-                </div>
+                
 
                 
 
                 <div class="nav-link collapsed">
                     <i class="fas fa-fw fa-cog"></i>
-                    <Link to='/createstudent'><span style={{'color':'white'}}>Create Strudent</span></Link>
+                    <span style={{'color':'white' , 'fontSize' : '20px','cursor':'pointer'}} onClick={()=>{
+                        if(context.teacher.length>0){
+                            navigate('/createstudent')
+                        } else{
+                            swal('Add atLeast 1 Teacher First')
+                        }
+                    }}>Create Student</span>
+                </div>
+
+                <div class="nav-link collapsed">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <Link to='/createteacher'><span style={{'color':'white', 'fontSize' : '20px'}}>Create Teacher</span></Link>
                 </div>
 
                 

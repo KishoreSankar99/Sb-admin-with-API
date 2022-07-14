@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import {useNavigate} from 'react-router-dom'
+import swal from 'sweetalert'
+import { StudentContext } from './App'
 
 function Topbar() {
+    let[search,setSearch] = useState('')
+    let navigate = useNavigate()
+    let context = useContext(StudentContext)
   return (
     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -12,9 +18,22 @@ function Topbar() {
         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
         <div class="input-group">
             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                aria-label="Search" aria-describedby="basic-addon2"/>
+                aria-label="Search" aria-describedby="basic-addon2" onChange={(e)=>setSearch(e.target.value)}/>
             <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary" type="button" onClick={()=>{
+                    let trim = search.replace(' ', '');
+                    trim = trim.toLowerCase();
+                    setSearch(trim)
+                    
+                    trim = trim.trim()
+                    console.log(trim)
+                    if(trim==='createteacher'){
+                    navigate('/createteacher')
+                    }
+                    if(trim==='createstudent'){
+                      context.teacher.length===0? swal('Add Teacher first to Visit add Student') : navigate('/createstudent')
+                    }
+                }}>
                     <i class="fas fa-search fa-sm"></i>
                 </button>
             </div>
