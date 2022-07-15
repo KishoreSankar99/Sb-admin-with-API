@@ -5,7 +5,13 @@ export let data={
     pendingRequests:18
   }
   export let DBstudents = [
-   
+   {
+    name:'kishore',
+    email:'mail',
+    mobile:'2345678',
+    batch:'r5',
+    teacher:'456'
+   }
   ]
 
   export let DBteacher = [

@@ -9,6 +9,9 @@ import CreateTeacher from "./CreateTeacher";
 import React, {useState} from 'react'
 import Table from 'react-bootstrap/Table';
 import {data,DBstudents,DBteacher} from './DataBase'
+import NestedRoute from "./NestedRoute";
+import Kishore from "./Kishore";
+import Abi from "./Abi";
 
 
 
@@ -36,6 +39,10 @@ function App() {
               <Route path="/createstudent" element={<CreateStudent  />}/>
               <Route path="/createteacher" element={<CreateTeacher  />}/>
               <Route path="/editstudent/:id" element={<EditStudent  />}/>
+              <Route path="/nestedroute" element={<NestedRoute/>}>
+                <Route path="kishore" element={<Kishore/>}/>
+                <Route path="abi" element={<Abi/>}/>
+              </Route>
               <Route path="/" element={<Dashboard />}/>
 
             </Routes>

@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { StudentContext } from "../src/App";
 import Dropdown from "react-bootstrap/Dropdown";
+import axios from 'axios'
 
 function CreateStudent(props) {
   let context = useContext(StudentContext);
@@ -13,7 +14,7 @@ function CreateStudent(props) {
   let [batch, setBatch] = useState("");
   let [teacher, setTeacher] = useState("");
   let navaigate = useNavigate();
-  let handleSubmit = () => {
+  let handleSubmit = async () => {
     let data = {
       name,
       email,
@@ -21,11 +22,9 @@ function CreateStudent(props) {
       batch,
       teacher,
     };
-
-    let students = [...context.students];
-    students.push(data);
-    context.setStudents(students);
-    console.log(context.students);
+    let res = await axios.post('https://61d28882da87830017e595ee.mockapi.io/students',data)
+    console.log(res)
+     
     navaigate("/dashboard");
   };
   let handleSetTeacher = (e) => {
@@ -54,7 +53,7 @@ function CreateStudent(props) {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>Mobile</Form.Label>
             <Form.Control
               type="text"
               placeholder="Mobile"
